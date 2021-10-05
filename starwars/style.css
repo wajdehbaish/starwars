@@ -1,0 +1,19 @@
+.evenTr {
+    background-color: blueviolet;
+}
+
+.oddTr {
+    background-color: rgb(172, 118, 223);
+}
+
+td {
+    text-align: center;
+    border: 1px solid black;
+}
+
+th {
+    color: white;
+    background-color: blueviolet;
+    text-align: 'center';
+    border: 1px solid black;
+}
