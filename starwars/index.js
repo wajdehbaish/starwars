@@ -1,5 +1,6 @@
+let all = []
 const getAllPeople = async() => {
-    let all = []
+
     const url = 'https://swapi.dev/api/people/'
     for (let i = 1; i <= 10; i++) {
         const request = await (await fetch(`https://swapi.dev/api/people/${i}`)).json()
@@ -11,13 +12,15 @@ const getAllPeople = async() => {
             hair_color: request.hair_color,
             planet: {
                 homeWorld: homeWorld.name,
-                popualtion: homeWorld.popualtion
+                population: homeWorld.population
             }
         }
         console.log(person);
         all.push(person)
+        addCharacterToTable(i - 1)
     }
     console.log(all);
+
 }
 async function run() {
     await getAllPeople()
@@ -68,11 +71,11 @@ function addHeadersRow() {
     tr.append(td3);
 
     const td4 = document.createElement('td');
-    td4.innerHTML = 'gender'
+    td4.innerHTML = 'planet'
     tr.append(td4);
 
     const td5 = document.createElement('td');
-    td5.innerHTML = 'birth year'
+    td5.innerHTML = 'population'
     tr.append(td5);
 
     table.append(tr)
@@ -106,7 +109,7 @@ function addCharacterToTable(ind) {
     tr.append(td4);
 
     const td5 = document.createElement('td');
-    td5.innerHTML = all[ind].planet.popualtion
+    td5.innerHTML = all[ind].planet.population
     tr.append(td5);
 
     table.append(tr);
