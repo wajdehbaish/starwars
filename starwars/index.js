@@ -1,6 +1,7 @@
 let all = []
 const getAllPeople = async() => {
 
+
     const url = 'https://swapi.dev/api/people/'
     for (let i = 1; i <= 10; i++) {
         const request = await (await fetch(`https://swapi.dev/api/people/${i}`)).json()
@@ -17,10 +18,11 @@ const getAllPeople = async() => {
         }
         console.log(person);
         all.push(person)
-        addCharacterToTable(i - 1)
+            // addCharacterToTable(i - 1)
+
     }
     console.log(all);
-
+    createTable(all)
 }
 async function run() {
     await getAllPeople()
@@ -62,9 +64,10 @@ function addHeadersRow() {
     td1.innerHTML = 'name'
     tr.append(td1);
 
-    const td2 = document.createElement('td');
-    td2.innerHTML = 'hair_color'
-    tr.append(td2);
+    // const td2 = document.createElement('td');
+    // td2.innerHTML = 'hair_color'
+    `<td>hair_color</td>`
+    tr.append()
 
     const td3 = document.createElement('td');
     td3.innerHTML = 'height'
@@ -114,4 +117,30 @@ function addCharacterToTable(ind) {
 
     table.append(tr);
 
+}
+
+function createTable(warriors) {
+
+    let table =
+        `<table style="width:100%">
+  <tr>
+    <th>name</th>
+    <th>hair</th>
+    <th>height</th>
+    <th>planet name</th>
+    <th>planet population</th>
+  </tr>`
+    for (let warrior of warriors) {
+        table +=
+            `<tr class="oddTr">
+   <td>${warrior.name}</td>
+   <td>${warrior.hair_color}</td>
+   <td>${warrior.height}</td>
+   <td>${warrior.planet.homeWorld}</td>
+   <td>${warrior.planet.population}</td>
+   </tr>`
+
+    }
+    table += '</table>'
+    document.body.innerHTML = table;
 }
